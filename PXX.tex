@@ -1,0 +1,312 @@
+% This is the aspauthor.tex LaTeX file
+% Copyright 2010, Astronomical Society of the Pacific Conference Series
+
+\documentclass[11pt,twoside]{article}
+\usepackage{asp2010}
+
+\resetcounters
+
+\bibliographystyle{asp2010}
+
+\markboth{The Astropy Collaboration}{Astropy???}
+
+\newcommand{\aspconf}{ASP Conf.\ Ser.}
+
+\begin{document}
+
+\title{Astropy: Building blocks for astronomy software}
+
+\author{The Astropy Collaboration}
+
+\begin{abstract}
+The Astropy Project is a community effort to develop an open source Python
+package of common data structures and routines used by other, more specialized
+Astronomy software in order to foster interoperability.
+The project encompasses the "core" ``astropy`` Python package, "affiliated
+packages" that strive to implement Astropy's coding standards and
+interoperability with other affiliated packages, and a broader community aimed
+at implementing Pythonic solutions to astronomy computing problems while
+minimizing duplication of effort.  The project also provides a framework for
+other projects that use Astropy to quickly get up and running by using the same
+solutions Astropy has already developed for installation, packaging, testing,
+documentation, and other nuts and bolts.
+Here we present an overview of the key features of the core package (existing
+and upcoming), current and planned affiliated packages, and how we manage a
+large open source project with a diverse community of contributors.
+\end{abstract}
+
+\section{Core \texttt{astropy} capabilities}
+
+The \texttt{astropy} package for Python (referred to as the "core" package of
+the Astropy Project) contains classes, functions, and utilities to address
+common needs of other astronomy software as well as interactive data analysis.
+It also includes a framework of sundry software development utilities such as a
+test framework (built around py.test) documentation helpers using Sphinx, a
+configuration system, and build and installation support built around distutils
+and setuptools.
+
+Here we list the sub-packages that make up the functionality of the core
+\texttt{astropy} package as of version 0.2, as well as some features planned
+for version 0.3 and beyond.
+
+\subsection{Core data structures and transformations}
+
+\altsubsubsection*{\texttt{astropy.units}}
+
+Handles defining and converting between physical units, and performing
+arithmetic with physical quantities (numerical scalars and arrays with
+associated units) using a powerful \texttt{Quantity} class.
+
+\altsubsubsection*{\texttt{astropy.constants}}
+
+Contains a number of physical constants useful in astronomy and physics.
+Constants are representing as \texttt{Quantity} objects with additional
+metadata describing their provenance and uncertainties.
+
+\altsubsubsection*{\texttt{astropy.nddata}}
+
+Provdes an \texttt{NDData} class for managing n-dimensional array-based data
+with attached metadata, errors, and masking. Also provides new convolution
+routines that treat NaN values properly.
+
+\altsubsubsection*{\texttt{astropy.table}}
+
+Provides a powerful \texttt{Table} class for storing and manipulating
+heterogeneous tables of data in a way that is familiar to Numpy users, though
+with more flexibility than the data structures built into Numpy including
+support for metadata and masking.
+
+\altsubsubsection*{\texttt{astropy.time}}
+Provides functionality for manipulating times and dates. Specific emphasis is
+placed on supporting time scales (e.g. UTC, TAI, UT1) and time representations
+(e.g. JD, MJD, ISO 8601) that are used in astronomy. Wraps the ERFA library of
+time and calendar routines, which is a fork of SOFA released under a less
+restrictive license.
+
+\altsubsubsection*{\texttt{astropy.coordinates}}
+
+Provides classes and transformation functions for representing celestial
+coordinates and for converting between standard systems in a uniform way.
+
+\altsubsubsection*{\texttt{astropy.wcs}}
+
+Contains utilities for managing WCS transformations in FITS files. These
+transformations map the pixel locations in an image to their real-world units.
+This sub-package is an import of the already widely used PyWCS package.
+
+\altsubsubsection*{\texttt{astropy.modeling}}
+
+Provides a framework for representing models performing model evaluation and
+fitting. It supports 1D and 2D models and fitting with parameter constraints,
+as well as an easy to use API for defining new models and fitting algorithms.
+
+\subsection{File I/O}
+
+One goal of Astropy is to minimize the effort of getting data into and out of
+different file formats. To that end it supports a registry of I/O "connectors"
+that allow data from different formats to be transparently read into and
+serialized from Astropy's general purpose \texttt{NDData} and \texttt{Table}
+classes.  For example, a table can be transparently read from a FITS file,
+modified as needed, and written out to an HDF5 file.  Support for lower-level
+operations on specific file formats is maintained as well.
+
+\altsubsubsection*{\texttt{astropy.io.fits}}
+
+A port of the already widely used PyFITS package, supporting reading and
+writing FITS files including support for many non-standard FITS conventions.
+
+\altsubsubsection*{\texttt{astropy.io.ascii}}
+
+A port of the popular asciitables package with support from reading from and
+writing a wide range of plain text formats to and from Astropy \texttt{Table}
+objects.
+
+\altsubsubsection*{\texttt{astropy.io.votable}}
+
+A port of the VOTable package for reading and writing the IVOA VOTable format
+to and from Astropy \texttt{Table} objects, as well as validating them.
+
+\altsubsubsection*{\texttt{astropy.io.misc}}
+
+Includes optional support for tables stored in HD5 where h5py is available.
+
+\subsection{Astronomy computations and utilities}
+
+\altsubsubsection*{\texttt{astropy.cosmology}}
+
+Contains classes for representing cosmologies, and utility functions for
+calculating commonly used quantities that depend on a cosmological model. This
+includes distances, ages and lookback times corresponding to a measured
+redshift or the transverse separation corresponding to a measured angular
+separation.
+
+\altsubsubsection*{\texttt{astropy.stats}}
+
+This sub-package holds statistical functions and algorithms used in astronomy,
+some of which are more specialized than one would find in
+\texttt{scipy.stats}.
+
+\altsubsubsection*{\texttt{astropy.vo}}
+
+Handles simple access for Virtual Observatory (VO) services. Currently, only
+Simple Cone Search Version 1.03 as defined in IVOA Recommendation (February 22,
+2008) is supported.
+
+\section{Affiliated packages}
+
+The Astropy project includes the concept of "affiliated packages".  An
+affiliated package is an astronomy-related Python package that is not part of
+the core \texttt{astropy} package, but has requested to be included under the
+umbrella of the Astropy Project.  Some affiliated packages may be considered
+for inclusion in the core package once they reach a reasonable level of
+maturity and usefulness.  Others may be more specialized or have enough
+external dependencies (GUI libraries, for example) that they make more sense
+as separate packages.
+
+The standards for inclusion in the Astropy Project are not strict, but it does
+imply interoperability with other affiliated packages through use of the
+common classes and data structures provided by the core package.  It also
+implies adoption of similar coding standards as Astropy, as well as high
+standards of documentation, testing, ease of installation, and open access.
+To help achieve these standards we provide our framework in the form of a
+package template that can be easily modified by upstart projects to suit
+their needs, while providing some organizational homogeneity across affiliated
+packages.
+
+In the future we also plan to include simple tools for discovering and
+installing new affiliated packages--we hope that becoming an Astropy
+affiliated package will be a good way for new and existing Python astronomy
+packages to gain exposure.
+
+Some currently featured affiliated packages include Montage-wrapper, Ginga,
+APLpy, astroML, and Astropysics.  A few additional affiliated packages that
+are currently under development are photutils, astroquery, specutils, and
+kcorrect.  The venerable pysynphot package is also being converted to an
+Astropy affiliated package.
+
+\section{Community and collaboration}
+
+A primary guiding principle behind Astropy has been that it is developed by
+and for the astronomy community, and that it strives to include contributions
+from users and other developers from around the world and from all
+sub-disciplines.  It also aims to encourage best practices from the software
+engineering world in the hope of creating a clean, consistent, and stable API;
+thorough, well-maintained, and easy to read documentation; and and constant
+feedback through careful issue tracking and continuous integration testing.
+All of our development practices and guidelines are documented as well so that
+other projects--whether affiliated with Astropy or not--may adopt them without
+having to develop their own standards from scratch.
+
+In order to better enable collaboration we have adopted the GitHub open source
+code hosting service which provides an issue tracker and a git source code
+repository.  GitHub is designed around collaboration, and is set up to allow a
+low barrier of entry to submitting new code and bug fixes to open source
+projects.  Astropy has been "forked" over 100 times on GitHub, which is to say
+over 100 people have their own copies of the Astropy repository in which they
+can fix bugs and develop experimental new code to share back to the main
+Astropy repository via "pull requests".  As of writing, over 50 contributors
+have had their code pulled into the main Astropy repository--more than 20 with
+over 10 commits and about 10 people with over 100 commits.  Over 200 people
+have contributed with guidance, ideas, and issue reports via the GitHub issue
+tracker and the astropy-dev mailing list.  Close to 1500 issues have been
+opened on the issue tracker with more than 1000 of them resolved.
+
+The development process ensures that any bug fixes or new features that are
+implemented are accompanied by tests, and any relevant updates to the
+documentation.  This keeps the documentation regularly up to date, even for the
+development version of the software.  Free documentation building and hosting
+by Read the Docs ensures that the latest documentation is always accessible.
+All new pull requests are tested against multiple Python and Numpy versions
+using the free continuous integration system Travis.  More comprehensive
+testing against multiple OS platforms (Linux, MacOS X, and Windows) is made
+possible by Jenkins with hosting from Shining Panda.  Continuous testing on
+multiple platforms has made it possible for system integrators to include
+Astropy in many other software package bundles such as Enthought Canopy,
+Continuum Analytics' Anaconda, and OS packaging systems like Debian's apt.
+Every single change made to the system is tested so that Astropy keeps working
+on all platforms it supports, and is tracked so that users can easily find out
+what changed between versions.
+
+This development workflow has worked very well thus far, attracting
+contributions from many new developers.  In fact the ease of contribution has
+blurred the line between developers and users.  In fact, we have even
+implemented a feature that allows anyone reading the documentation to submit
+edits and improvements with just a few clicks in their web browser and no
+prior knowledge fo the git version control system.
+
+%\texttt{astropy.units} & Active & \\
+%\texttt{astropy.constants} & Active &
+%Contains a number of physical constants useful in astronomy and physics.
+%Constants are representing as \texttt{Quantity} objects with additional
+%meta-data describing their provenance and uncertainties.\\
+
+% - Robust. sustainable infrastructure
+%   - Data structure integration
+%   - Coding style
+%   - Documentation
+%   - Tests (several thousand)
+%   - Continuous integration on Linux, OSX, and Windows
+%     - Tests against multiple versions of Python and Numpy
+% 
+% - Ease of installation
+%   - Relatively few dependencies
+%   - Build and test infrastructure
+%   - Quality build system for ease of inclusion in software bundles like
+%     Enthought Canopy and Continuum Analytics Anaconda, as well as OS
+%     packages like Debian/Ubuntu
+% 
+% - Ease of reuse
+%   - Nonrestricive licence
+%   - Even includes ERFA--a fork of SOFA with a less restrictive license
+% 
+% - Core sub-packages
+% 
+% - Affiliated packages
+%   - Allow for different solutions to common needs
+%   - Express an interest in the goal of improving ruse, interoperability,
+%     and coding standards
+%   - Leverage the Astropy docs / installation / testing interface
+%   - Hosted either under the Astropy project or independently
+%   - Where appropriate can track for inclusion in the core `astropy` package
+%   - Packages
+%     - Featured
+%       - Montage-wrapper // Python wrapper for the Montage Astronomical Image
+%         Mosaic Engine
+%       - Ginga // Graphical application for viewing and plotting on
+%         astronomical images from FITS files
+%       - APLpy - Graphical application and library aimed at producing
+%         publication-quality plots of astronomical data from FITS files
+%     - Others
+%       - astroML
+%       - astropysics
+%       - astroquery
+%       - kcorrect
+%       - phoutils
+%       - pydl
+%       - pysynphot
+%       - specutils
+% 
+% - Community
+%   - GitHub
+%   - Lowering barriers to contribution
+%     - Edit this page on GitHub
+%   - Statistics:
+%     - 51+ contributors on GitHub
+%     - 21+ with > 10 commits; 9 with > 100 commits
+%     - 191+ people on astropy-dev
+%   - Social media
+%   - GSoC
+% 
+% - Technologies
+%   - Python
+%   - Numpy
+%   - SciPy
+%   - Matplotlib
+%   - GitHub
+%   - Jenkins and/or Shining Panda
+%   - Travis
+%   - Readthedocs
+
+\bibliography{PXX}
+
+\end{document}
