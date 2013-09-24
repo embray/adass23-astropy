@@ -38,13 +38,12 @@ large open source project with a diverse community of contributors.
 
 \section{Core \texttt{astropy} Capabilities}
 
-The \texttt{astropy} package for Python (referred to as the "core" package of
-the Astropy Project) contains classes, functions, and utilities to address
-common needs of other astronomy software as well as interactive data analysis.
-It also includes a framework of sundry software development utilities such as a
-test framework (built around py.test) documentation helpers using Sphinx, a
-configuration system, and build and installation support built around distutils
-and setuptools.
+The \texttt{astropy} package for Python \citep{2013arXiv1307.6212T}, referred
+to as the "core" package of the Astropy Project, contains classes and functions
+to address common needs of other astronomy software as well as interactive data
+analysis.  It also includes a framework of sundry software development
+utilities such as a test framework, documentation helpers, a configuration
+system, and build and installation support.
 
 Here we list the sub-packages that make up the functionality of the core
 \texttt{astropy} package as of version 0.2, as well as some features planned
@@ -73,16 +72,16 @@ routines that treat NaN values properly.
 \altsubsubsection*{\texttt{astropy.table}}
 
 Provides a powerful \texttt{Table} class for storing and manipulating
-heterogeneous tables of data in a way that is familiar to Numpy users, though
-with more flexibility than the data structures built into Numpy including
-support for metadata and masking.
+heterogeneous tables of data in a way that is familiar to users of NumPy
+\citep{oliphant2006guide,van2011numpy}, though with more flexibility than the
+data structures built into NumPy, including support for metadata and masking.
 
 \altsubsubsection*{\texttt{astropy.time}}
 Provides functionality for manipulating times and dates.  Specific emphasis is
 placed on supporting time scales (e.g.~UTC, TAI, UT1) and time representations
 (e.g.~JD, MJD, ISO 8601) that are used in astronomy.  Wraps the ERFA library of
-time and calendar routines, which is a fork of SOFA released under a less
-restrictive license.
+time and calendar routines, which is a fork of SOFA \citep{sofa_wallace}
+released under a more permissive license.
 
 \altsubsubsection*{\texttt{astropy.coordinates}}
 
@@ -106,15 +105,16 @@ as well as an easy to use API for defining new models and fitting algorithms.
 One goal of Astropy is to minimize the effort of getting data into and out of
 different file formats.  To that end it supports a registry of I/O "connectors"
 that allow data from different formats to be transparently read into and
-serialized from Astropy's general purpose \texttt{NDData} and \texttt{Table}
-classes.  For example, a table can be transparently read from a FITS file,
+serialized from Astropy's generic \texttt{NDData} and \texttt{Table} classes.
+For example, a \texttt{Table} can be read from a FITS file \citep{fits3},
 modified as needed, and written out to an HDF5 file.  Support for lower-level
 operations on specific file formats is maintained as well.
 
 \altsubsubsection*{\texttt{astropy.io.fits}}
 
-A port of the already widely used PyFITS package, supporting reading and
-writing FITS files including support for many non-standard FITS conventions.
+A port of the already widely used PyFITS \citep{barrett1999pyfits} package,
+supporting reading and writing FITS files including support for many
+non-standard FITS conventions.
 
 \altsubsubsection*{\texttt{astropy.io.ascii}}
 
@@ -125,7 +125,8 @@ objects.
 \altsubsubsection*{\texttt{astropy.io.votable}}
 
 A port of the VOTable package for reading and writing the IVOA VOTable format
-to and from Astropy \texttt{Table} objects, as well as validating them.
+\citep{oschenbein2009votable} to and from Astropy \texttt{Table} objects, as
+well as validating them.
 
 \altsubsubsection*{\texttt{astropy.io.misc}}
 
