@@ -66,7 +66,7 @@ metadata describing their provenance and uncertainties.
 \altsubsubsection*{\texttt{astropy.nddata}}
 
 Provdes an \texttt{NDData} class for managing n-dimensional array-based data
-with attached metadata, errors, and masking. Also provides new convolution
+with attached metadata, errors, and masking.  Also provides new convolution
 routines that treat NaN values properly.
 
 \altsubsubsection*{\texttt{astropy.table}}
@@ -77,9 +77,9 @@ with more flexibility than the data structures built into Numpy including
 support for metadata and masking.
 
 \altsubsubsection*{\texttt{astropy.time}}
-Provides functionality for manipulating times and dates. Specific emphasis is
-placed on supporting time scales (e.g. UTC, TAI, UT1) and time representations
-(e.g. JD, MJD, ISO 8601) that are used in astronomy. Wraps the ERFA library of
+Provides functionality for manipulating times and dates.  Specific emphasis is
+placed on supporting time scales (e.g.~UTC, TAI, UT1) and time representations
+(e.g.~JD, MJD, ISO 8601) that are used in astronomy.  Wraps the ERFA library of
 time and calendar routines, which is a fork of SOFA released under a less
 restrictive license.
 
@@ -90,20 +90,20 @@ coordinates and for converting between standard systems in a uniform way.
 
 \altsubsubsection*{\texttt{astropy.wcs}}
 
-Contains utilities for managing WCS transformations in FITS files. These
+Contains utilities for managing WCS transformations in FITS files.  These
 transformations map the pixel locations in an image to their real-world units.
 This sub-package is an import of the already widely used PyWCS package.
 
 \altsubsubsection*{\texttt{astropy.modeling}}
 
 Provides a framework for representing models performing model evaluation and
-fitting. It supports 1D and 2D models and fitting with parameter constraints,
+fitting.  It supports 1D and 2D models and fitting with parameter constraints,
 as well as an easy to use API for defining new models and fitting algorithms.
 
 \subsection{File I/O}
 
 One goal of Astropy is to minimize the effort of getting data into and out of
-different file formats. To that end it supports a registry of I/O "connectors"
+different file formats.  To that end it supports a registry of I/O "connectors"
 that allow data from different formats to be transparently read into and
 serialized from Astropy's general purpose \texttt{NDData} and \texttt{Table}
 classes.  For example, a table can be transparently read from a FITS file,
@@ -135,7 +135,7 @@ Includes optional support for tables stored in HD5 where h5py is available.
 \altsubsubsection*{\texttt{astropy.cosmology}}
 
 Contains classes for representing cosmologies, and utility functions for
-calculating commonly used quantities that depend on a cosmological model. This
+calculating commonly used quantities that depend on a cosmological model.  This
 includes distances, ages and lookback times corresponding to a measured
 redshift or the transverse separation corresponding to a measured angular
 separation.
@@ -148,13 +148,13 @@ some of which are more specialized than one would find in
 
 \altsubsubsection*{\texttt{astropy.vo}}
 
-Handles simple access for Virtual Observatory (VO) services. Currently, only
+Handles simple access for Virtual Observatory (VO) services.  Currently, only
 Simple Cone Search Version 1.03 as defined in IVOA Recommendation (February 22,
 2008) is supported.
 
 \section{Affiliated packages}
 
-The Astropy project includes the concept of "affiliated packages".  An
+The Astropy Project includes the concept of "affiliated packages".  An
 affiliated package is an astronomy-related Python package that is not part of
 the core \texttt{astropy} package, but has requested to be included under the
 umbrella of the Astropy Project.  Some affiliated packages may be considered
