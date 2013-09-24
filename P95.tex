@@ -27,10 +27,9 @@ The project encompasses the "core" \texttt{astropy} Python package, "affiliated
 packages" that strive to implement Astropy's coding standards and
 interoperability with other affiliated packages, and a broader community aimed
 at implementing Pythonic solutions to astronomy computing problems while
-minimizing duplication of effort.  The project also provides a framework for
-other projects that use Astropy to quickly get up and running by using the same
-solutions Astropy has already developed for installation, packaging, testing,
-documentation, and other nuts and bolts.
+minimizing duplication of effort.  The project also provides a template for
+other projects that use Astropy to reuse much of Astropy's development
+framework without reinventing the wheel.
 Here we present an overview of the key features of the core package (existing
 and upcoming), current and planned affiliated packages, and how we manage a
 large open source project with a diverse community of contributors.
@@ -45,9 +44,9 @@ analysis.  It also includes a framework of sundry software development
 utilities such as a test framework, documentation helpers, a configuration
 system, and build and installation support.
 
-Here we list the sub-packages that make up the functionality of the core
-\texttt{astropy} package as of version 0.2, as well as some features planned
-for version 0.3 and beyond.
+Here we list some of the sub-packages that make up the functionality of the
+core \texttt{astropy} package as of version 0.2, as well as some new
+functionality that will debut in version 0.3.
 
 \subsection{Core Data Structures and Transformations}
 
@@ -97,8 +96,8 @@ This sub-package is an import of the already widely used PyWCS package.
 \altsubsubsection*{\texttt{astropy.modeling}}
 
 Provides a framework for representing models performing model evaluation and
-fitting.  It supports 1D and 2D models and fitting with parameter constraints,
-as well as an easy to use API for defining new models and fitting algorithms.
+fitting.  It supports 1D and 2D models and fitting with parameter constraints
+and an API for defining new models and fitting algorithms.
 
 \subsection{File I/O}
 
@@ -150,9 +149,7 @@ some of which are more specialized than one would find in
 
 \altsubsubsection*{\texttt{astropy.vo}}
 
-Handles simple access for Virtual Observatory (VO) services.  Currently, only
-Simple Cone Search Version 1.03 as defined in IVOA Recommendation (February 22,
-2008) is supported.
+Handles simple access for Virtual Observatory (VO) services.
 
 \section{Affiliated Packages}
 
@@ -162,99 +159,71 @@ the core \texttt{astropy} package, but has requested to be included under the
 umbrella of the Astropy Project.  Some affiliated packages may be considered
 for inclusion in the core package once they reach a reasonable level of
 maturity and usefulness.  Others may be more specialized or have enough
-external dependencies (GUI libraries, for example) that they make more sense
-as separate packages.
+external dependencies (GUI libraries, for example) that they make more sense as
+separate packages.  In general we hope that becoming an Astropy affiliated
+package will be seen as a good way for new and existing packages to gain
+exposure.
 
 The standards for inclusion in the Astropy Project are not strict, but it does
-imply interoperability with other affiliated packages through use of the
-common classes and data structures provided by the core package.  It also
-implies adoption of similar coding standards as Astropy, as well as high
-standards of documentation, testing, ease of installation, and open access.
-To help achieve these standards we provide our framework in the form of a
-package template that can be easily modified by upstart projects to suit
-their needs, while providing some organizational homogeneity across affiliated
-packages.
+imply interoperability with other affiliated packages through use of the common
+classes and data structures provided by the core package.  It also implies
+adoption of similar coding standards, as well as high standards of
+documentation, testing, ease of installation, and open access.  To help
+affiliated package developers achieve these goals we provide our framework in
+the form of a package template that can be used to bootstrap new projects.
 
-In the future we also plan to include simple tools for discovering and
-installing new affiliated packages--we hope that becoming an Astropy
-affiliated package will be a good way for new and existing Python astronomy
-packages to gain exposure.
-
-Some currently featured affiliated packages include Montage-wrapper, Ginga,
-APLpy, astroML, and Astropysics.  A few additional affiliated packages that
-are currently under development are photutils, astroquery, specutils, and
-kcorrect.  The venerable pysynphot package is also being converted to an
-Astropy affiliated package.
+Some currently featured affiliated
+packages\footnote{\url{http://www.astropy.org/affiliated/index.html}} include
+Montage-wrapper, Ginga, APLpy, astroML, and Astropysics.  A few additional
+affiliated packages that are currently under development are photutils,
+astroquery, specutils, and kcorrect.
 
 \section{Community and Collaboration}
 
 The Astropy Project was launched as a response to an increasing proliferation
 of Python packages (often with "astro" in their names) that attempt to build
-core sets of routines ported from IDL and/or IRAF.  Most of these efforts were
-supported by one or two individuals, or an individual institution, and did not
-always involve much community support or feedback.  Some of us also became
-concerned that too much effort was being spent reinventing the wheel, rather
-than contributing to a common, open source code base.
+core sets of routines ported from IDL and/or IRAF.  Many of these efforts were
+maintained by one or two individuals, or an individual institution, and did not
+always involve much community support or feedback.  Some became concerned that
+too much effort was being spent reinventing the wheel, rather than contributing
+to a common, open source code base.
 
 A primary guiding principle behind Astropy has been that it is developed by and
 for the astronomy community, and that it strives to include contributions from
 users and other developers from around the world and from all sub-disciplines.
-It also aims to encourage best practices from the software engineering world in
-the hope of creating a clean, consistent, and stable API; thorough,
-well-maintained, and easy to read documentation; and constant feedback through
-careful issue tracking and continuous integration testing.  All of our
-development practices and guidelines are documented as well so that other
+It also aims to encourage best practices from software engineering in the hope
+of creating a clean, consistent, and stable API; thorough and well-maintained
+documentation\footnote{\url{http://docs.astropy.org}}; and constant feedback
+through careful issue tracking and continuous integration testing.  All of our
+development practices and guidelines are documented so that other
 projects--whether affiliated with Astropy or not--may adopt them without having
 to develop their own standards from scratch.
 
-In order to better enable collaboration we have adopted the GitHub open source
-code hosting service which provides an issue tracker and a git source code
-repository.  GitHub is designed around collaboration, and is set up to allow a
-low barrier of entry to submitting new code and bug fixes to open source
-projects.  Astropy has been "forked" over 100 times on GitHub, which is to say
-over 100 people have their own copies of the Astropy repository in which they
-can fix bugs and develop experimental new code to share back to the main
-Astropy repository via "pull requests".  As of writing, over 50 contributors
-have had their code pulled into the main Astropy repository--more than 20 with
-over 10 commits and about 10 people with over 100 commits.  Over 200 people
-have contributed with guidance, ideas, and issue reports via the GitHub issue
-tracker and the astropy-dev mailing list.  Close to 1500 issues have been
-opened on the issue tracker with more than 1000 of them resolved.
+In order to better enable collaboration we have adopted the GitHub code hosting
+service which provides an issue tracker and a git source code repository.
+GitHub is designed around collaboration and enables a low barrier of entry to
+submitting new code and bug fixes to open source projects.
 
-The development process ensures that any bug fixes or new features that are
-implemented are accompanied by tests, and any relevant updates to the
-documentation.  This keeps the documentation regularly up to date, even for the
-development version of the software.  Free documentation building and hosting
-by Read the Docs ensures that the latest documentation is always accessible.
-All new pull requests are tested against multiple Python and Numpy versions
-using the free continuous integration system Travis.  More comprehensive
-testing against multiple OS platforms (Linux, MacOS X, and Windows) is made
-possible by Jenkins with hosting from Shining Panda.  Continuous testing on
-multiple platforms has made it possible for system integrators to include
-Astropy in many other software package bundles such as Enthought Canopy,
-Continuum Analytics' Anaconda, and OS packaging systems like Debian's apt.
-Every single change made to the system is tested so that Astropy keeps working
-on all platforms it supports, and is tracked so that users can easily find out
-what changed between versions.
+Astropy's development process ensures that any bug fixes or new features that
+are implemented are accompanied by tests, and any relevant updates to the
+documentation.  Free documentation building and hosting by Read the Docs
+ensures that the latest documentation builds and is accessible online.  All new
+pull requests are tested against multiple Python and NumPy versions using the
+continuous integration system Travis.  Comprehensive testing against multiple
+OS platforms (Linux, MacOS X, and Windows) is made possible by Jenkins with
+hosting from Shining Panda.  Multi-platform testing has made it possible for
+system integrators to include Astropy in many other software package bundles
+such as Enthought Canopy, Continuum Analytics' Anaconda, and OS packaging
+systems like Debian's apt.
 
-This development workflow has worked very well thus far, attracting
-contributions from many new developers.  In fact the ease of contribution has
-blurred the line between developers and users.  In fact, we have even
-implemented a feature that allows anyone reading the documentation to submit
-edits and improvements with just a few clicks in their web browser and no
-prior knowledge of the git version control system.
-
-It should be clarified that the Astropy Project is not purely democratic--it is
-overseen by a coordinating committee consisting of Perry Greenfield (STScI,
-which is committed significant developer resources to the project), Thomas
-Robitaille (Max Planck Institute for Astronomy), and Erik Tollerud (Department
-of Astronomy, Yale).  The coordinating committee drives the overall vision for
-Astropy, and has the final vote on any disputes over design decisions.  In
-practice, however, any contentions have been resolved through discussions on
-GitHub and on the Astropy mailing list, resulting in designs that all
-interested parties have agreed on.  We strive for continuous feedback and
-rework, however, and hope to avoid a "designed by committee" feel.  So far, the
-author would argue, we have been successful in this goal.
+Having an accessible development workflow has attracted contributions from many
+new developers (over 50 source code contributors at the time of writing).  The
+ease of contribution has blurred the line between developers and users--in
+fact, we have even implemented a feature that allows anyone reading the
+documentation to submit edits and improvements with just a few clicks in their
+web browser and no prior knowledge of the git version control system.  We
+strive for continuous feedback and rework and hope to avoid a "designed by
+committee" feel.
 
 \bibliography{P95}
 
