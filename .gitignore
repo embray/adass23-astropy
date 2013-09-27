@@ -5,3 +5,4 @@
 *.log
 *.swp
 P95.pdf
+!poster/P95.pdf
